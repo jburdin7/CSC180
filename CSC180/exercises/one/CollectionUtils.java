@@ -14,7 +14,7 @@ public class CollectionUtils {
 		if(coll.isEmpty() == false) {
 			if(coll != null && obj != null) {
 				for(Object o : coll) {
-					if(o == obj) {
+					if(o.equals(obj)) {
 						i++;
 					}
 				}
