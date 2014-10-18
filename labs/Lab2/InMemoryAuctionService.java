@@ -44,12 +44,13 @@ public class InMemoryAuctionService implements AuctionService {
 			}
 		}
 		
-		if(operators.peek().equals("AND")) {
-			oper = operators.pop();
-			searchTerms.add(new AndPredicate(searchTerms.pop(), searchTerms.pop()));
-			searchTerms.add(new OrPredicate(searchTerms.pop(), searchTerms.pop()));
+		for(String str : operators) {
+			if(str.equals("OR")) {
+				oper = operators.pop();
+				searchTerms.add(new AndPredicate(searchTerms.pop(), searchTerms.pop()));
+				searchTerms.add(new OrPredicate(searchTerms.pop(), searchTerms.pop()));
+			}
 		}
-		
 		
 		
 		searchResults = (ArrayList<Auction>) CollectionUtils.filter(currentAuctions.values(), searchTerms.pop());
